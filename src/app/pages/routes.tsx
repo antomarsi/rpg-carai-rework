@@ -11,9 +11,9 @@ const Routes: React.FC = () => {
     <HashRouter>
       <Layout>
         <Switch>
-          <Route path='/' exact={true} component={Editor} />
+          <Route path='/' exact={true} component={Home} />
           <Route path='/browser' component={Home} />
-          <Route path='/editor' component={Splash} />
+          <Route path='/editor' component={Editor} />
           <Route component={NotFound} />
         </Switch>
       </Layout>

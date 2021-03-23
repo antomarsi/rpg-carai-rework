@@ -3,6 +3,10 @@ import { createStyles, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme) =>
   createStyles({
     drawer: {
+      flexShrink: 0,
+      width: 68
+    },
+    paper: {
       display: 'flex',
       backgroundColor: theme.palette.background.default,
     },

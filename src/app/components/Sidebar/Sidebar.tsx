@@ -38,7 +38,12 @@ const SidebarComponent: FunctionComponent<HeaderProps> = ({ location }) => {
   }, [location]);
 
   return (
-    <Drawer variant='permanent' classes={{ paper: classes.drawer }}>
+    <Drawer
+      variant='permanent'
+      classes={{ paper: classes.paper }}
+      className={classes.drawer}
+      anchor='left'
+    >
       {menusContainers.map((menu, index) => (
         <div key={index}>
           {Object.entries(menu).map(([path, icon]) => (
@@ -48,7 +53,7 @@ const SidebarComponent: FunctionComponent<HeaderProps> = ({ location }) => {
               disableRipple
               disabled={path === linkValue}
               onClick={() => {
-                window.electron.openEditor()
+                window.electron.openEditor();
               }}
             >
               {icon}

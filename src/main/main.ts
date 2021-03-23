@@ -1,4 +1,7 @@
+import entities from '@src/database/entities';
 import { app, BrowserWindow, ipcMain } from 'electron';
+
+import { createConnection } from 'typeorm';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
@@ -12,7 +15,7 @@ let mainWindow: BrowserWindow | null;
 
 let editorWindow: BrowserWindow | null;
 
-const createEditorWindow = (): void => {
+const createEditorWindow = async (): Promise<void> => {
   if (editorWindow) return;
 
   editorWindow = new BrowserWindow({
@@ -43,7 +46,14 @@ ipcMain.on('open-editor', (event, args) => {
   createEditorWindow();
 });
 
-const createWindow = (): void => {
+const createWindow = async (): Promise<void> => {
+  await createConnection({
+    type: 'better-sqlite3',
+    database: './dbdata/db.sql',
+    entities: entities,
+    synchronize: true,
+    logging: true,
+  });
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1280,
